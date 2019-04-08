@@ -1,0 +1,117 @@
+package com.example.sql;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.widget.EditText;
+import android.widget.TextView;
+
+public class secilenkelime extends AppCompatActivity {
+
+    TextView konu, aciklama, syntax, ornek, ekbilgi;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.secilenkelime);
+
+        TextView konu=(TextView)  findViewById(R.id.id_konu);
+        TextView aciklama=(TextView)  findViewById(R.id.id_aciklama);
+        TextView syntax=(TextView)  findViewById(R.id.id_syntax);
+        TextView ornek=(TextView)  findViewById(R.id.id_ornek);
+        TextView ekbilgi=(TextView)  findViewById(R.id.id_ekbilgi);
+
+        Intent x = getIntent();
+        String gelenkelime = x.getExtras().getString("secilenkelimeid");
+
+        //EditText kelime = (EditText) findViewById(R.id.id_text);
+        //kelime.setText(gelenkelimeid);
+
+           if (gelenkelime.equals("SELECT")){
+           konu.setText("SELECT");
+           aciklama.setText("The SELECT statement is used to select data from a database.");
+           syntax.setText("SELECT column1, column2,.. FROM table_name;");
+           ornek.setText("SELECT Name, City FROM Customers;");
+           ekbilgi.setText("If you want to select all the fields available in the table, use the following syntax:\n" +
+                   "\n" +
+                   "SELECT * FROM table_name;");}
+
+           if (gelenkelime.equals("SELECT DISTINCT")){
+                konu.setText("SELECT DISTINCT");
+                aciklama.setText("The SELECT DISTINCT statement is used to return only distinct values.");
+                syntax.setText("SELECT DISTINCT column1, column2,.. FROM table_name;");
+                ornek.setText("SELECT DISTINCT City FROM Customers;");}
+
+           if (gelenkelime.equals("WHERE")){
+                konu.setText("WHERE");
+                aciklama.setText("The WHERE clause is used to filter records.");
+                syntax.setText("SELECT column1, column2, ...\n" +
+                        "FROM table_name\n" +
+                        "WHERE condition;");
+                ornek.setText("SELECT * FROM Customers\n" +
+                        "WHERE Country='Washington';");
+                ekbilgi.setText("=\tEqual\t\n" +
+                        ">\tGreater than\t\n" +
+                        "<\tLess than\t\n" +
+                        ">=\tGreater than or equal\t\n" +
+                        "<=\tLess than or equal\t\n" +
+                        "<>\tNot equal. Note: In some versions of SQL this operator may be written as !=\t\n" +
+                        "BETWEEN\tBetween a certain range\t\n" +
+                        "LIKE\tSearch for a pattern\t\n" +
+                        "IN\tTo specify multiple possible values for a column");}
+
+           if (gelenkelime.equals("AND,OR,NOT")){
+                konu.setText("AND,OR,NOT");
+                aciklama.setText("The AND operator displays a record if all the conditions separated by AND are TRUE.\n" +
+                        "The OR operator displays a record if any of the conditions separated by OR is TRUE.\n" +
+                        "The NOT operator displays a record if the condition(s) is NOT TRUE.");
+                syntax.setText("SELECT column1, column2, ...\n" +
+                        "FROM table_name\n" +
+                        "WHERE condition1 AND condition2 AND condition3 ...;");
+                ornek.setText("SELECT * FROM Customers\n" +
+                        "WHERE Country='Germany' AND City='Münich';");}
+
+           if (gelenkelime.equals("ORDER BY")){
+                konu.setText("ORDER BY");
+                aciklama.setText("The ORDER BY keyword is used to sort the result-set in ascending (Default) or descending (DESC) order.");
+                syntax.setText("SELECT column1, column2, ...\n" +
+                        "FROM table_name\n" +
+                        "ORDER BY column1, column2, ... ASC|DESC;");
+                ornek.setText("SELECT * FROM Customers\n" +
+                        "ORDER BY Country;");}
+
+        if (gelenkelime.equals("INSERT INTO")){
+            konu.setText("INSERT INTO");
+            aciklama.setText("The INSERT INTO statement is used to insert new records in a table.");
+            syntax.setText("INSERT INTO table_name (column1, column2, column3, ...)\n" +
+                    "VALUES (value1, value2, value3, ...);");
+            ornek.setText("INSERT INTO Customers (City, Country)\n" +
+                    "VALUES ('Washington', 'USA');");}
+
+        if (gelenkelime.equals("UPDATE")){
+            konu.setText("UPDATE");
+            aciklama.setText("The UPDATE statement is used to modify the existing records in a table.");
+            syntax.setText("UPDATE table_name\n" +
+                    "SET column1 = value1, column2 = value2, ...\n" +
+                    "WHERE condition;");
+            ornek.setText("UPDATE Customers\n" +
+                    "SET Country = 'Germany', City= 'Frankfurt'\n" +
+                    "WHERE CustomerID = 1;");}
+
+        if (gelenkelime.equals("UPDATE")){
+            konu.setText("UPDATE");
+            aciklama.setText("The UPDATE statement is used to modify the existing records in a table.");
+            syntax.setText("UPDATE table_name\n" +
+                    "SET column1 = value1, column2 = value2, ...\n" +
+                    "WHERE condition;");
+            ornek.setText("UPDATE Customers\n" +
+                    "SET Country = 'Germany', City= 'Frankfurt'\n" +
+                    "WHERE CustomerID = 1;");}
+
+
+                    
+    }
+
+    
+    }
+
