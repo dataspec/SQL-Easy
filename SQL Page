@@ -27,6 +27,7 @@ public class secilenkelime extends AppCompatActivity {
         //EditText kelime = (EditText) findViewById(R.id.id_text);
         //kelime.setText(gelenkelimeid);
 
+
            if (gelenkelime.equals("SELECT")){
            konu.setText("SELECT");
            aciklama.setText("The SELECT statement is used to select data from a database.");
@@ -98,20 +99,230 @@ public class secilenkelime extends AppCompatActivity {
                     "SET Country = 'Germany', City= 'Frankfurt'\n" +
                     "WHERE CustomerID = 1;");}
 
-        if (gelenkelime.equals("UPDATE")){
-            konu.setText("UPDATE");
-            aciklama.setText("The UPDATE statement is used to modify the existing records in a table.");
-            syntax.setText("UPDATE table_name\n" +
-                    "SET column1 = value1, column2 = value2, ...\n" +
+        if (gelenkelime.equals("DELETE")){
+            konu.setText("DELETE");
+            aciklama.setText("The DELETE statement is used to delete existing records in a table.");
+            syntax.setText("DELETE FROM table_name WHERE condition;");
+            ornek.setText("DELETE FROM Customers WHERE City='Washington';");}
+
+        if (gelenkelime.equals("MIN,MAX")){
+            konu.setText("MIN,MAX");
+            aciklama.setText("The MIN(),MAX() functions returns the smallest/largest value of the selected column.");
+            syntax.setText("SELECT MIN/MAX(column_name)\n" +
+                    "FROM table_name\n" +
                     "WHERE condition;");
-            ornek.setText("UPDATE Customers\n" +
-                    "SET Country = 'Germany', City= 'Frankfurt'\n" +
-                    "WHERE CustomerID = 1;");}
+            ornek.setText("SELECT MIN(Price) AS SmallestPrice\n" +
+                    "FROM Products;");}
+        if (gelenkelime.equals("COUNT,AVG,SUM")){
+            konu.setText("COUNT,AVG,SUM");
+            aciklama.setText("The COUNT() function returns the number of rows that matches a specified criteria.\n" +
+                    "\n" +
+                    "The AVG() function returns the average value of a numeric column.\n" +
+                    "\n" +
+                    "The SUM() function returns the total sum of a numeric column.");
+            syntax.setText("SELECT COUNT/AVG/SUM(column_name)\n" +
+                    "FROM table_name\n" +
+                    "WHERE condition;");
+            ornek.setText("SELECT COUNT(City)\n" +
+                    "FROM Products;");}
+        if (gelenkelime.equals("LIKE")){
+            konu.setText("LIKE");
+            aciklama.setText("The LIKE operator is used in a WHERE clause to search for a specified pattern in a column.");
+            syntax.setText("SELECT column1, column2, ...\n" +
+                    "FROM table_name\n" +
+                    "WHERE column LIKE pattern;");
+            ornek.setText("SELECT * FROM Customers\n" +
+                    "WHERE City LIKE 'a%';");
+            ekbilgi.setText("WHERE City LIKE 'a%'\tFinds any values that start with \"a\"\n" +
+                    "WHERE City LIKE '%a'\tFinds any values that end with \"a\"\n" +
+                    "WHERE City LIKE '%or%'\tFinds any values that have \"or\" in any position\n" +
+                    "WHERE City LIKE '_r%'\tFinds any values that have \"r\" in the second position\n" +
+                    "WHERE City LIKE 'a_%_%'\tFinds any values that start with \"a\" and are at least 3 characters in length\n" +
+                    "WHERE City LIKE 'a%o'\tFinds any values that start with \"a\" and ends with \"o\"");
+
+        }
+       if (gelenkelime.equals("IN")){
+            konu.setText("IN");
+            aciklama.setText("The IN operator allows you to specify multiple values in a WHERE clause.");
+            syntax.setText("SELECT column_name(s)\n" +
+                    "FROM table_name\n" +
+                    "WHERE column_name IN (value1, value2, ...);\n\n" +
+                            "SELECT column_name(s)\n"+
+                    "FROM table_name\n " +
+                    "WHERE column_name IN (SELECT STATEMENT);");
+            ornek.setText("SELECT * FROM Customers\n" +
+                    "WHERE Country IN ('Germany', 'France', 'UK');");
+        }
+        if (gelenkelime.equals("BETWEEN")){
+            konu.setText("BETWEEN");
+            aciklama.setText("The BETWEEN operator selects values within a given range.");
+            syntax.setText("SELECT column_name(s)\n" +
+                    "FROM table_name\n" +
+                    "WHERE column_name BETWEEN value1 AND value2;");
+            ornek.setText("SELECT * FROM Products\n" +
+                    "WHERE Price BETWEEN 200 AND 400;"
+            );
+        }
+        if (gelenkelime.equals("INNER JOIN")){
+            konu.setText("INNER JOIN");
+            aciklama.setText("The INNER JOIN keyword selects records that have matching values in both tables.");
+            syntax.setText("SELECT column_name(s)\n" +
+                    "FROM table1\n" +
+                    "INNER JOIN table2\n" +
+                    "ON table1.column_name = table2.column_name;");
+            ornek.setText("SELECT Orders.OrderID, Customers.CustomerName\n" +
+                    "FROM Orders\n" +
+                    "INNER JOIN Customers ON Orders.CustomerID = Customers.CustomerID;");}
+
+        if (gelenkelime.equals("LEFT/RIGHT JOIN")){
+            konu.setText("LEFT/RIGHT JOIN");
+            aciklama.setText("The LEFT/RIGHT JOIN keyword returns all records from the left/right table (table1), and the matched records from the right/left table (table2). The result is NULL from the right/left side, if there is no match.");
+            syntax.setText("SELECT column_name(s)\n" +
+                    "FROM table1\n" +
+                    "LEFT/RIGHT JOIN table2\n" +
+                    "ON table1.column_name = table2.column_name;");
+            ornek.setText("SELECT Customers.CustomerName, Orders.OrderID\n" +
+                    "FROM Customers\n" +
+                    "LEFT JOIN Orders ON Customers.CustomerID = Orders.CustomerID\n" +
+                    "ORDER BY Customers.CustomerName;");}
+
+        if (gelenkelime.equals("UNION")){
+            konu.setText("UNION");
+            aciklama.setText("The UNION operator is used to combine the result-set of two or more SELECT statements.");
+            syntax.setText("SELECT column_name(s) FROM table1\n" +
+                    "UNION\n" +
+                    "SELECT column_name(s) FROM table2;");
+            ornek.setText("SELECT City FROM Customers\n" +
+                    "UNION\n" +
+                    "SELECT City FROM Suppliers\n" +
+                    "ORDER BY City;");
+            ekbilgi.setText("Each SELECT statement within UNION must have the same number of columns\n" +
+                    "The columns must also have similar data types\n" +
+                    "The columns in each SELECT statement must also be in the same order");}
+
+        if (gelenkelime.equals("GROUP BY")){
+            konu.setText("GROUP BY");
+            aciklama.setText("The GROUP BY statement is often used with aggregate functions (COUNT, MAX, MIN, SUM, AVG) to group the result-set by one or more columns.");
+            syntax.setText("SELECT column_name(s)\n" +
+                    "FROM table_name\n" +
+                    "WHERE condition\n" +
+                    "GROUP BY column_name(s)\n" +
+                    "ORDER BY column_name(s);");
+            ornek.setText("SELECT COUNT(City), Country\n" +
+                    "FROM Customers\n" +
+                    "GROUP BY Country;");}
+
+        if (gelenkelime.equals("HAVING")){
+            konu.setText("HAVING");
+            aciklama.setText("The HAVING clause was added to SQL because the WHERE keyword could not be used with aggregate functions.");
+            syntax.setText("SELECT column_name(s)\n" +
+                    "FROM table_name\n" +
+                    "WHERE condition\n" +
+                    "GROUP BY column_name(s)\n" +
+                    "HAVING condition\n" +
+                    "ORDER BY column_name(s);");
+            ornek.setText("SELECT COUNT(CustomerID), Country\n" +
+                    "FROM Customers\n" +
+                    "GROUP BY Country\n" +
+                    "HAVING COUNT(CustomerID) > 5;");}
+
+        if (gelenkelime.equals("EXIST")){
+            konu.setText("EXIST");
+            aciklama.setText("The EXISTS operator is used to test for the existence of any record in a subquery.");
+            syntax.setText("SELECT column_name(s)\n" +
+                    "FROM table_name\n" +
+                    "WHERE EXISTS\n" +
+                    "(SELECT column_name FROM table_name WHERE condition);");
+            ornek.setText("SELECT SupplierName\n" +
+                    "FROM Suppliers\n" +
+                    "WHERE EXISTS (SELECT ProductName FROM Products WHERE Products.SupplierID = Suppliers.supplierID AND Price < 20);");}
+
+        if (gelenkelime.equals("ANY/ALL")){
+            konu.setText("ANY/ALL");
+            aciklama.setText("The ANY and ALL operators are used with a WHERE or HAVING clause and return true if any of the subquery values meet the condition.");
+            syntax.setText("SELECT column_name(s)\n" +
+                    "FROM table_name\n" +
+                    "WHERE column_name operator ANY/ALL\n" +
+                    "(SELECT column_name FROM table_name WHERE condition);");
+            ornek.setText("SELECT ProductName\n" +
+                    "FROM Products\n" +
+                    "WHERE ProductID = ANY/ALL (SELECT ProductID FROM OrderDetails WHERE Quantity = 10);");}
+
+        if (gelenkelime.equals("SELECT INTO")){
+            konu.setText("SELECT INTO");
+            aciklama.setText("The SELECT INTO statement copies data from one table into a new table.");
+            syntax.setText("SELECT *\n" +
+                    "INTO newtable [IN externaldb]\n" +
+                    "FROM oldtable\n" +
+                    "WHERE condition;");
+            ornek.setText("SELECT CustomerName, ContactName INTO CustomersBackup2017\n" +
+                    "FROM Customers;");}
+
+        if (gelenkelime.equals("INSERT INTO SELECT")){
+            konu.setText("INSERT INTO SELECT");
+            aciklama.setText("The INSERT INTO SELECT statement copies data from one table and inserts it into another table.");
+            syntax.setText("INSERT INTO table2\n" +
+                    "SELECT * FROM table1\n" +
+                    "WHERE condition;");
+            ornek.setText("INSERT INTO Customers (CustomerName, City, Country)\n" +
+                    "SELECT SupplierName, City, Country FROM Suppliers;");}
 
 
-                    
+        if (gelenkelime.equals("CREATE DB")){
+            konu.setText("CREATE DB");
+            aciklama.setText("The CREATE DATABASE statement is used to create a new SQL database.");
+            syntax.setText("CREATE DATABASE databasename;");
+            ornek.setText("CREATE DATABASE CustomersDB;");}
+
+        if (gelenkelime.equals("CREATE TABLE")){
+            konu.setText("CREATE TABLE");
+            aciklama.setText("The CREATE TABLE statement is used to create a new table in a database.");
+            syntax.setText("CREATE TABLE table_name (\n" +
+                    "    column1 datatype,\n" +
+                    "    column2 datatype,\n" +
+                    "    column3 datatype,\n" +
+                    "   ....\n" +
+                    ");");
+            ornek.setText("CREATE TABLE Customers (\n" +
+                    "    PersonID int,\n" +
+                    "    LastName varchar(255),\n" +
+                    "    FirstName varchar(255),\n" +
+                    "    Address varchar(255),\n" +
+                    "    City varchar(255) \n" +
+                    ");");}
+
+        if (gelenkelime.equals("DROP/TRUNCATE TABLE")){
+            konu.setText("DROP/TRUNCATE TABLE DB");
+            aciklama.setText("The DROP TABLE statement is used to drop an existing table in a database.The TRUNCATE TABLE statement is used to delete the data inside a table, but not the table itself.");
+            syntax.setText("DROP/TRUNCATE TABLE table_name;");
+            ornek.setText("DROP/TRUNCATE TABLE Customers;");}
+        if (gelenkelime.equals("ALTER TABLE")){
+            konu.setText("ALTER TABLE");
+            aciklama.setText("The ALTER TABLE statement is used to add, delete, or modify columns in an existing table.");
+            syntax.setText("ALTER TABLE table_name\n" +
+                    "ADD column_name datatype;\n\n" +
+                    "ALTER TABLE table_name\n" +
+                    "DROP COLUMN column_name;\n\n" +
+                    "ALTER TABLE table_name\n" +
+                    "ALTER COLUMN column_name datatype;");
+            ornek.setText("ALTER TABLE Customers\n" +
+                    "ADD Email varchar(255);\n\n" +
+                    "ALTER TABLE Customers\n" +
+                    "DROP COLUMN Email;");}
+
+        if (gelenkelime.equals("CONSTRAINTS")){
+            konu.setText("CONSTRAINTS");
+            aciklama.setText("SQL constraints are used to specify rules for data in a table.");
+            syntax.setText("CREATE TABLE table_name (\n" +
+                    "    column1 datatype constraint,\n" +
+                    "    column2 datatype constraint,...);");
+            ornek.setText("NOT NULL - A column cannot have a NULL value\n" +
+                    "UNIQUE - All values in a column are different\n" +
+                    "PRIMARY KEY - A combination of a NOT NULL and UNIQUE.\n" +
+                    "FOREIGN KEY - Uniquely identifies a row/record in another table\n" +
+                    "DEFAULT - Sets a default value for a column when no value is specified\n" +
+                    "INDEX - Used to create and retrieve data from the database very quickly\n");}
+        //-----------------
     }
-
-    
     }
 
