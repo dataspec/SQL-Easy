@@ -25,8 +25,11 @@ public class MainActivity extends AppCompatActivity
 
     private String[] ulkeler =
             {"SELECT", "SELECT DISTINCT", "WHERE", "AND,OR,NOT","ORDER BY",
-                    "INSERT INTO", "UPDATE", "DELETE", "MIN,MAX", "COUNT,AVG,SUM", "LIKE",
-                    "WILDCARTS", "IN", "BETWEEN"};
+                    "INSERT INTO", "UPDATE", "DELETE", "MIN(),MAX()", "COUNT(),AVG(),SUM()", "LIKE",
+                    "IN", "BETWEEN","INNER JOIN","LEFT/RIGHT JOIN","UNION","GROUP BY",
+                    "HAVING","EXIST","ANY/ALL","SELECT INTO","INSERT INTO SELECT","\u058D    Database Operations    \u058D","CREATE DB",
+                    "CREATE TABLE", "DROP/TRUNCATE TABLE","ALTER TABLE","CONSTRAINTS","VIEW","SQL Keywords"
+            };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,23 +40,33 @@ public class MainActivity extends AppCompatActivity
 
         final ListView listem=(ListView) findViewById(R.id.id_liste);
         ArrayAdapter<String> veriAdaptoru=new ArrayAdapter<String>
-                (this, android.R.layout.simple_list_item_1, android.R.id.text1, ulkeler);
+                (this, R.layout.mycustomlistview, R.id.id_sqltext, ulkeler);
         listem.setAdapter(veriAdaptoru);
 
 
 
-        listem.setOnItemClickListener(new AdapterView.OnItemClickListener()
+                listem.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
             public void onItemClick(AdapterView<?> myadapterView, View view, int position, long id) {
+
+
                 Intent myintent = new Intent(getApplicationContext(),secilenkelime.class);
 
                 String mykelimeid =(String) listem.getItemAtPosition(position);
                 myintent.putExtra("secilenkelimeid",mykelimeid);//diger forma aktarilacak kelime id bilgisi
-                startActivity(myintent);
+                if (!mykelimeid.equals("\u058D    Database Operations    \u058D"))
+                {startActivity(myintent);}
 
             }
         });
+
+
+
+
+
+
+
 
         //---------------------------------------
 
