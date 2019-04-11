@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class secilenkelime extends AppCompatActivity {
@@ -27,6 +28,7 @@ public class secilenkelime extends AppCompatActivity {
         //EditText kelime = (EditText) findViewById(R.id.id_text);
         //kelime.setText(gelenkelimeid);
 
+        ImageView img=(ImageView) findViewById(R.id.id_image);
 
            if (gelenkelime.equals("SELECT")){
            konu.setText("SELECT");
@@ -35,13 +37,23 @@ public class secilenkelime extends AppCompatActivity {
            ornek.setText("SELECT Name, City FROM Customers;");
            ekbilgi.setText("If you want to select all the fields available in the table, use the following syntax:\n" +
                    "\n" +
-                   "SELECT * FROM table_name;");}
+                   "SELECT * FROM table_name;");
+
+               int resId = getResources().getIdentifier("selectimg", "drawable", getPackageName());
+               img.setImageResource(resId);
+
+
+
+           }
 
            if (gelenkelime.equals("SELECT DISTINCT")){
                 konu.setText("SELECT DISTINCT");
                 aciklama.setText("The SELECT DISTINCT statement is used to return only distinct values.");
                 syntax.setText("SELECT DISTINCT column1, column2,.. FROM table_name;");
-                ornek.setText("SELECT DISTINCT City FROM Customers;");}
+                ornek.setText("SELECT DISTINCT emp_name FROM Customers;");
+               int resId = getResources().getIdentifier("selectdistinct", "drawable", getPackageName());
+               img.setImageResource(resId);
+           }
 
            if (gelenkelime.equals("WHERE")){
                 konu.setText("WHERE");
@@ -49,8 +61,8 @@ public class secilenkelime extends AppCompatActivity {
                 syntax.setText("SELECT column1, column2, ...\n" +
                         "FROM table_name\n" +
                         "WHERE condition;");
-                ornek.setText("SELECT * FROM Customers\n" +
-                        "WHERE Country='Washington';");
+                ornek.setText("SELECT StudentName FROM School\n" +
+                        "WHERE MarksObtained>350;");
                 ekbilgi.setText("=\tEqual\t\n" +
                         ">\tGreater than\t\n" +
                         "<\tLess than\t\n" +
@@ -59,7 +71,11 @@ public class secilenkelime extends AppCompatActivity {
                         "<>\tNot equal. Note: In some versions of SQL this operator may be written as !=\t\n" +
                         "BETWEEN\tBetween a certain range\t\n" +
                         "LIKE\tSearch for a pattern\t\n" +
-                        "IN\tTo specify multiple possible values for a column");}
+                        "IN\tTo specify multiple possible values for a column");
+               int resId = getResources().getIdentifier("where", "drawable", getPackageName());
+               img.setImageResource(resId);
+
+           }
 
            if (gelenkelime.equals("AND,OR,NOT")){
                 konu.setText("AND,OR,NOT");
@@ -79,7 +95,10 @@ public class secilenkelime extends AppCompatActivity {
                         "FROM table_name\n" +
                         "ORDER BY column1, column2, ... ASC|DESC;");
                 ornek.setText("SELECT * FROM Customers\n" +
-                        "ORDER BY Country;");}
+                        "ORDER BY EmpName;");
+               int resId = getResources().getIdentifier("orderby", "drawable", getPackageName());
+               img.setImageResource(resId);
+           }
 
         if (gelenkelime.equals("INSERT INTO")){
             konu.setText("INSERT INTO");
@@ -105,16 +124,16 @@ public class secilenkelime extends AppCompatActivity {
             syntax.setText("DELETE FROM table_name WHERE condition;");
             ornek.setText("DELETE FROM Customers WHERE City='Washington';");}
 
-        if (gelenkelime.equals("MIN,MAX")){
-            konu.setText("MIN,MAX");
+        if (gelenkelime.equals("MIN(),MAX()")){
+            konu.setText("MIN(),MAX()");
             aciklama.setText("The MIN(),MAX() functions returns the smallest/largest value of the selected column.");
             syntax.setText("SELECT MIN/MAX(column_name)\n" +
                     "FROM table_name\n" +
                     "WHERE condition;");
             ornek.setText("SELECT MIN(Price) AS SmallestPrice\n" +
                     "FROM Products;");}
-        if (gelenkelime.equals("COUNT,AVG,SUM")){
-            konu.setText("COUNT,AVG,SUM");
+        if (gelenkelime.equals("COUNT(),AVG(),SUM()")){
+            konu.setText("COUNT(),AVG(),SUM()");
             aciklama.setText("The COUNT() function returns the number of rows that matches a specified criteria.\n" +
                     "\n" +
                     "The AVG() function returns the average value of a numeric column.\n" +
@@ -132,14 +151,15 @@ public class secilenkelime extends AppCompatActivity {
                     "FROM table_name\n" +
                     "WHERE column LIKE pattern;");
             ornek.setText("SELECT * FROM Customers\n" +
-                    "WHERE City LIKE 'a%';");
+                    "WHERE first_name LIKE 'Ba%';");
             ekbilgi.setText("WHERE City LIKE 'a%'\tFinds any values that start with \"a\"\n" +
-                    "WHERE City LIKE '%a'\tFinds any values that end with \"a\"\n" +
-                    "WHERE City LIKE '%or%'\tFinds any values that have \"or\" in any position\n" +
-                    "WHERE City LIKE '_r%'\tFinds any values that have \"r\" in the second position\n" +
-                    "WHERE City LIKE 'a_%_%'\tFinds any values that start with \"a\" and are at least 3 characters in length\n" +
-                    "WHERE City LIKE 'a%o'\tFinds any values that start with \"a\" and ends with \"o\"");
-
+                    "WHERE xx LIKE '%a'\tFinds any values that end with \"a\"\n" +
+                    "WHERE xx LIKE '%or%'\tFinds any values that have \"or\" in any position\n" +
+                    "WHERE xx LIKE '_r%'\tFinds any values that have \"r\" in the second position\n" +
+                    "WHERE xx LIKE 'a_%_%'\tFinds any values that start with \"a\" and are at least 3 characters in length\n" +
+                    "WHERE xx LIKE 'a%o'\tFinds any values that start with \"a\" and ends with \"o\"");
+            int resId = getResources().getIdentifier("like", "drawable", getPackageName());
+            img.setImageResource(resId);
         }
        if (gelenkelime.equals("IN")){
             konu.setText("IN");
@@ -147,7 +167,7 @@ public class secilenkelime extends AppCompatActivity {
             syntax.setText("SELECT column_name(s)\n" +
                     "FROM table_name\n" +
                     "WHERE column_name IN (value1, value2, ...);\n\n" +
-                            "SELECT column_name(s)\n"+
+                    "SELECT column_name(s)\n"+
                     "FROM table_name\n " +
                     "WHERE column_name IN (SELECT STATEMENT);");
             ornek.setText("SELECT * FROM Customers\n" +
@@ -172,7 +192,10 @@ public class secilenkelime extends AppCompatActivity {
                     "ON table1.column_name = table2.column_name;");
             ornek.setText("SELECT Orders.OrderID, Customers.CustomerName\n" +
                     "FROM Orders\n" +
-                    "INNER JOIN Customers ON Orders.CustomerID = Customers.CustomerID;");}
+                    "INNER JOIN Customers ON Orders.CustomerID = Customers.CustomerID;");
+            int resId = getResources().getIdentifier("innerjoin", "drawable", getPackageName());
+            img.setImageResource(resId);
+        }
 
         if (gelenkelime.equals("LEFT/RIGHT JOIN")){
             konu.setText("LEFT/RIGHT JOIN");
@@ -184,7 +207,10 @@ public class secilenkelime extends AppCompatActivity {
             ornek.setText("SELECT Customers.CustomerName, Orders.OrderID\n" +
                     "FROM Customers\n" +
                     "LEFT JOIN Orders ON Customers.CustomerID = Orders.CustomerID\n" +
-                    "ORDER BY Customers.CustomerName;");}
+                    "ORDER BY Customers.CustomerName;");
+            int resId = getResources().getIdentifier("leftrightjoin", "drawable", getPackageName());
+            img.setImageResource(resId);
+        }
 
         if (gelenkelime.equals("UNION")){
             konu.setText("UNION");
@@ -196,9 +222,9 @@ public class secilenkelime extends AppCompatActivity {
                     "UNION\n" +
                     "SELECT City FROM Suppliers\n" +
                     "ORDER BY City;");
-            ekbilgi.setText("Each SELECT statement within UNION must have the same number of columns\n" +
-                    "The columns must also have similar data types\n" +
-                    "The columns in each SELECT statement must also be in the same order");}
+            ekbilgi.setText("-Each SELECT statement within UNION must have the same number of columns.\n" +
+                    "-The columns must also have similar data types.\n" +
+                    "-The columns in each SELECT statement must also be in the same order.");}
 
         if (gelenkelime.equals("GROUP BY")){
             konu.setText("GROUP BY");
@@ -255,7 +281,7 @@ public class secilenkelime extends AppCompatActivity {
                     "INTO newtable [IN externaldb]\n" +
                     "FROM oldtable\n" +
                     "WHERE condition;");
-            ornek.setText("SELECT CustomerName, ContactName INTO CustomersBackup2017\n" +
+            ornek.setText("SELECT ID, CustomerName, City INTO BackupDB\n" +
                     "FROM Customers;");}
 
         if (gelenkelime.equals("INSERT INTO SELECT")){
@@ -322,6 +348,108 @@ public class secilenkelime extends AppCompatActivity {
                     "FOREIGN KEY - Uniquely identifies a row/record in another table\n" +
                     "DEFAULT - Sets a default value for a column when no value is specified\n" +
                     "INDEX - Used to create and retrieve data from the database very quickly\n");}
+
+        if (gelenkelime.equals("VIEW")){
+            konu.setText("VIEW");
+            aciklama.setText("A view is a virtual table based on the result-set of an SQL statement.");
+            syntax.setText("CREATE VIEW view_name AS\n" +
+                    "SELECT column1, column2, ...\n" +
+                    "FROM table_name\n" +
+                    "WHERE condition;");
+            ornek.setText("CREATE VIEW [Customers] AS\n" +
+                    "SELECT CustomerName, City\n" +
+                    "FROM Customers\n" +
+                    "WHERE Country = \"USA\";");}
+
+        if (gelenkelime.equals("SQL Keywords")){
+            konu.setText("SQL Keywords");
+            aciklama.setText("SQL keywords reference");
+            syntax.setText(" ");
+            ornek.setText(" ");
+            ekbilgi.setText("ADD\tAdds a column in an existing table\n" +
+                    "ADD CONSTRAINT\tAdds a constraint after a table is already created\n" +
+                    "ALTER\tAdds, deletes, or modifies columns in a table, or changes the data type of a column in a table\n" +
+                    "ALTER COLUMN\tChanges the data type of a column in a table\n" +
+                    "ALTER TABLE\tAdds, deletes, or modifies columns in a table\n" +
+                    "ALL\tReturns true if all of the subquery values meet the condition\n" +
+                    "AND\tOnly includes rows where both conditions is true\n" +
+                    "ANY\tReturns true if any of the subquery values meet the condition\n" +
+                    "AS\tRenames a column or table with an alias\n" +
+                    "ASC\tSorts the result set in ascending order\n" +
+                    "BACKUP DATABASE\tCreates a back up of an existing database\n" +
+                    "BETWEEN\tSelects values within a given range\n" +
+                    "CASE\tCreates different outputs based on conditions\n" +
+                    "CHECK\tA constraint that limits the value that can be placed in a column\n" +
+                    "COLUMN\tChanges the data type of a column or deletes a column in a table\n" +
+                    "CONSTRAINT\tAdds or deletes a constraint\n" +
+                    "CREATE\tCreates a database, index, view, table, or procedure\n" +
+                    "CREATE DATABASE\tCreates a new SQL database\n" +
+                    "CREATE INDEX\tCreates an index on a table (allows duplicate values)\n" +
+                    "CREATE OR REPLACE VIEW\tUpdates a view\n" +
+                    "CREATE TABLE\tCreates a new table in the database\n" +
+                    "CREATE PROCEDURE\tCreates a stored procedure\n" +
+                    "CREATE UNIQUE INDEX\tCreates a unique index on a table (no duplicate values)\n" +
+                    "CREATE VIEW\tCreates a view based on the result set of a SELECT statement\n" +
+                    "DATABASE\tCreates or deletes an SQL database\n" +
+                    "DEFAULT\tA constraint that provides a default value for a column\n" +
+                    "DELETE\tDeletes rows from a table\n" +
+                    "DESC\tSorts the result set in descending order\n" +
+                    "DISTINCT\tSelects only distinct (different) values\n" +
+                    "DROP\tDeletes a column, constraint, database, index, table, or view\n" +
+                    "DROP COLUMN\tDeletes a column in a table\n" +
+                    "DROP CONSTRAINT\tDeletes a UNIQUE, PRIMARY KEY, FOREIGN KEY, or CHECK constraint\n" +
+                    "DROP DATABASE\tDeletes an existing SQL database\n" +
+                    "DROP DEFAULT\tDeletes a DEFAULT constraint\n" +
+                    "DROP INDEX\tDeletes an index in a table\n" +
+                    "DROP TABLE\tDeletes an existing table in the database\n" +
+                    "DROP VIEW\tDeletes a view\n" +
+                    "EXEC\tExecutes a stored procedure\n" +
+                    "EXISTS\tTests for the existence of any record in a subquery\n" +
+                    "FOREIGN KEY\tA constraint that is a key used to link two tables together\n" +
+                    "FROM\tSpecifies which table to select or delete data from\n" +
+                    "FULL OUTER JOIN\tReturns all rows when there is a match in either left table or right table\n" +
+                    "GROUP BY\tGroups the result set (used with aggregate functions: COUNT, MAX, MIN, SUM, AVG)\n" +
+                    "HAVING\tUsed instead of WHERE with aggregate functions\n" +
+                    "IN\tAllows you to specify multiple values in a WHERE clause\n" +
+                    "INDEX\tCreates or deletes an index in a table\n" +
+                    "INNER JOIN\tReturns rows that have matching values in both tables\n" +
+                    "INSERT INTO\tInserts new rows in a table\n" +
+                    "INSERT INTO SELECT\tCopies data from one table into another table\n" +
+                    "IS NULL\tTests for empty values\n" +
+                    "IS NOT NULL\tTests for non-empty values\n" +
+                    "JOIN\tJoins tables\n" +
+                    "LEFT JOIN\tReturns all rows from the left table, and the matching rows from the right table\n" +
+                    "LIKE\tSearches for a specified pattern in a column\n" +
+                    "LIMIT\tSpecifies the number of records to return in the result set\n" +
+                    "NOT\tOnly includes rows where a condition is not true\n" +
+                    "NOT NULL\tA constraint that enforces a column to not accept NULL values\n" +
+                    "OR\tIncludes rows where either condition is true\n" +
+                    "ORDER BY\tSorts the result set in ascending or descending order\n" +
+                    "OUTER JOIN\tReturns all rows when there is a match in either left table or right table\n" +
+                    "PRIMARY KEY\tA constraint that uniquely identifies each record in a database table\n" +
+                    "PROCEDURE\tA stored procedure\n" +
+                    "RIGHT JOIN\tReturns all rows from the right table, and the matching rows from the left table\n" +
+                    "ROWNUM\tSpecifies the number of records to return in the result set\n" +
+                    "SELECT\tSelects data from a database\n" +
+                    "SELECT DISTINCT\tSelects only distinct (different) values\n" +
+                    "SELECT INTO\tCopies data from one table into a new table\n" +
+                    "SELECT TOP\tSpecifies the number of records to return in the result set\n" +
+                    "SET\tSpecifies which columns and values that should be updated in a table\n" +
+                    "TABLE\tCreates a table, or adds, deletes, or modifies columns in a table, or deletes a table or data inside a table\n" +
+                    "TOP\tSpecifies the number of records to return in the result set\n" +
+                    "TRUNCATE TABLE\tDeletes the data inside a table, but not the table itself\n" +
+                    "UNION\tCombines the result set of two or more SELECT statements (only distinct values)\n" +
+                    "UNION ALL\tCombines the result set of two or more SELECT statements (allows duplicate values)\n" +
+                    "UNIQUE\tA constraint that ensures that all values in a column are unique\n" +
+                    "UPDATE\tUpdates existing rows in a table\n" +
+                    "VALUES\tSpecifies the values of an INSERT INTO statement\n" +
+                    "VIEW\tCreates, updates, or deletes a view\n" +
+                    "WHERE\tFilters a result set to include only records that fulfill a specified condition");}
+
+
+
+
+
         //-----------------
     }
     }
